@@ -10,7 +10,7 @@
 //
 
 // Variables here are volatile. They are not usable from within the page, but only within this script
-var global_css = '.orbisFooter a{color:#FFF}#postingsTable tr.isNew td{background-color:#FFFFE0}#postingsTable tr.isNew:hover td{background-color:#FFFACD}#postingsTable .table-col--max-width{max-width:250px}#postingsTable .table-col--max-width-sm{max-width:200px}';
+var global_css = '.orbisFooter a{color:#FFF}#postingsTable tr.isNew td{background-color:#FFFFE0}#postingsTable tr.isNew:hover td{background-color:#FFFACD}#postingsTable .table-col--max-width-jobs{max-width:250px} #postingsTable .table-col--max-width{max-width:250px}#postingsTable .table-col--max-width-sm{max-width:200px}';
 
 function loadWWorksUI(run) {
     function appendToHead(element) {
@@ -31,6 +31,7 @@ function loadWWorksUI(run) {
         script.type = "text/javascript";
         script.textContent = "(" + run.toString() + ")()";
         document.body.appendChild(script);
+        shortenJobTitleLength();
     }
 
     loadStyle();
@@ -91,7 +92,7 @@ function runWWorksUI() {
             });
 
             // Add max-width to Title, Organization, Location
-            $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width');
+            $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width-jobs');
             $('#postingsTable tr').find('th, td').filter(':nth-child(3)').addClass('table-col--max-width');
             $('#postingsTable tr').find('th, td').filter(':nth-child(4)').addClass('table-col--max-width-sm');
         }
@@ -100,6 +101,8 @@ function runWWorksUI() {
         optimizeJobsTable();
         $(document).ajaxStop(optimizeJobsTable); // pagination, sorting, etc result in ajax calls which undo the modifications
     }
+
+
 
     // Find out which page we're on
     var path = $(location).attr("href");
@@ -120,4 +123,16 @@ function runWWorksUI() {
     }
 }
 
+function shortenJobTitleLength() {
+    $('#postingsTable tr').find('.table-col--max-width-jobs strong a').filter(function() {
+        that = $(this)
+        text = that[0].outerText;
+        href = that[0].href; 
+        if (text.length > 33) {
+            that[0].outerHTML = "<a href='" + href + "'>" + text.substring(0, 29) + '...' + "</a>";
+        }
+    });
+}
+
 loadWWorksUI(runWWorksUI);
+
