@@ -2,4 +2,5 @@ CHANGELOG
 =========
 
 # v0.1
- * Better titles
+ * Better/optimal table layout to view job postings
+ * Better browser titles

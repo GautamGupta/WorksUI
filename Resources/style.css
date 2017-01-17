@@ -1,5 +1,22 @@
 /* Style for WWorksUI written by Gautam Gupta (www.Gaut.am) */
 
+/* WWorksUI Links */
 .orbisFooter a {
-	color: #FFF;
+    color: #FFF;
+}
+
+/* New job tr background color */
+#postingsTable tr.isNew td {
+    background-color: #FFFFE0;
+}
+#postingsTable tr.isNew:hover td {
+    background-color: #FFFACD;
+}
+
+/* Limit width of some job table cols */
+#postingsTable .table-col--max-width {
+    max-width: 250px;
+}
+#postingsTable .table-col--max-width-sm {
+    max-width: 200px;
 }

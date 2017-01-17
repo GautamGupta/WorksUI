@@ -10,7 +10,7 @@
 //
 
 // Variables here are volatile. They are not usable from within the page, but only within this script
-var global_css = ".orbisFooter a{color: #FFF;}";
+var global_css = '.orbisFooter a{color:#FFF}#postingsTable tr.isNew td{background-color:#FFFFE0}#postingsTable tr.isNew:hover td{background-color:#FFFACD}#postingsTable .table-col--max-width{max-width:250px}#postingsTable .table-col--max-width-sm{max-width:200px}';
 
 function loadWWorksUI(run) {
     function appendToHead(element) {
@@ -39,15 +39,12 @@ function loadWWorksUI(run) {
 
 function runWWorksUI() {
     // Script-wise global variables that we can use here
-    var EMBED_DATA = {}; // Embedded data in base64 form
-
     var PAGE = {
         JOBS: {value: 0, link: "myAccount/co-op/coop-postings.htm"}
     };
-    var current_page = -1; //By default, we'll assume it's the login page
+    var current_page = -1;
 
-    function applyChangesAll(current_page) {
-
+    function applyChangesAll() {
         function modifyTitle(title) {
             title = title.split(" - ");
             title = title.slice(2);
@@ -66,6 +63,44 @@ function runWWorksUI() {
         $("body").append("<script type='text/javascript'>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-6851149-15', 'auto');ga('send', 'pageview');</script>");
     }
 
+    function applyChangesJobs() {
+        function moveTableColumn(table, from, to) {
+            var rows = $('tr', table);
+            var cols;
+            rows.each(function() {
+                cols = $(this).children('th, td');
+                cols.eq(from).detach().insertBefore(cols.eq(to));
+            });
+        }
+
+        function optimizeJobsTable() {
+            // Shorten text where possible
+            $('#postingsTable a.favourite:contains("Remove from shortlist")').text('Shortlisted');
+            $('#postingsTable a.btn-primary:contains("APPLY")').text('Apply');
+            $('#postingsTable th:contains("Views") a').text('# Views');
+            $('#postingsTable th:contains("Applications") a').text('# Apps');
+
+            // Move id and level columns to the end
+            moveTableColumn($('#postingsTable'), 1, 12); // ID
+            moveTableColumn($('#postingsTable'), 4, 12); // # Openings
+            moveTableColumn($('#postingsTable'), 6, 12); // Level
+
+            // Merge Organization & Division Column
+            $('#postingsTable tr').find('th, td').filter(':nth-child(3)').append(function() {
+                return '<br />' + $(this).next().remove().text();
+            });
+
+            // Add max-width to Title, Organization, Location
+            $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width');
+            $('#postingsTable tr').find('th, td').filter(':nth-child(3)').addClass('table-col--max-width');
+            $('#postingsTable tr').find('th, td').filter(':nth-child(4)').addClass('table-col--max-width-sm');
+        }
+
+        $('body').addClass('page--jobs');
+        optimizeJobsTable();
+        $(document).ajaxStop(optimizeJobsTable); // pagination, sorting, etc result in ajax calls which undo the modifications
+    }
+
     // Find out which page we're on
     var path = $(location).attr("href");
     for (var page in PAGE) {
@@ -80,6 +115,7 @@ function runWWorksUI() {
     // Page specific changes
     switch (current_page) {
         case PAGE.JOBS.value:
+            applyChangesJobs();
             break;
     }
 }

@@ -4,7 +4,8 @@ Improved WaterlooWorks experience. Fork of [MarmoUI](https://github.com/lishid/M
 
 ## Features
 
- * Better titles
+ * Better/optimal table layout to view job postings
+ * Better browser titles
 
 ## Installation
 
