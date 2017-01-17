@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name                WWorksUI
 // @description         Improved WaterlooWorks experience
-// @author              Gautam Gupta (www.Gaut.am)
+// @author              Product Vision Club (productvisionclub.com)
 // @version             0.1
 // @include             https://waterlooworks.uwaterloo.ca*
 // ==/UserScript==
@@ -57,7 +57,7 @@ function runWWorksUI() {
         document.title = modifyTitle(document.title);
 
         // Remove current time and replace by an actual footer
-        $(".orbisFooter .span6").append(" / <a href='https://github.com/GautamGupta/WWorksUI' target='_blank'>WWorksUI</a> by <a href='http://gaut.am/' target='_blank'>Gautam Gupta</a>");
+        $(".orbisFooter .span6").append(" / <a href='https://github.com/ProductVisionClub/WWorksUI' target='_blank'>WWorksUI</a> by <a href='http://gaut.am/' target='_blank'>Product Vision Club</a>");
 
         // Google analytics helps for statistics
         $("body").append("<script type='text/javascript'>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-6851149-15', 'auto');ga('send', 'pageview');</script>");
