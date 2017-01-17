@@ -10,7 +10,7 @@ Improved WaterlooWorks experience. Fork of [MarmoUI](https://github.com/lishid/M
 ## Installation
 
 ### Google Chrome
- * Open WWorksUI plugin in Chrome Web Store and click "Add to Chrome"
+ * Open [WWorksUI plugin](https://chrome.google.com/webstore/detail/wworksui/pifacaonomblmikddmennhodpjncoclp) in Chrome Web Store and click "Add to Chrome"
  * Alternatively, download [`script.js`](https://raw.githubusercontent.com/ProductVisionClub/WWorksUI/master/WWorksUI-Chrome/scripts/script.js) (Right-click link -> Save Link As...)
     - Go to Tools -> Extensions (or type in `chrome://extensions` in the url bar)
     - Drag and drop `script.js` from where you downloaded it into the extensions page
