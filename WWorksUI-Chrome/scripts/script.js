@@ -31,7 +31,6 @@ function loadWWorksUI(run) {
         script.type = "text/javascript";
         script.textContent = "(" + run.toString() + ")()";
         document.body.appendChild(script);
-        shortenJobTitleLength();
     }
 
     loadStyle();
@@ -97,12 +96,21 @@ function runWWorksUI() {
             $('#postingsTable tr').find('th, td').filter(':nth-child(4)').addClass('table-col--max-width-sm');
         }
 
+        function shortenJobTitle() {
+            $('#postingsTable tr').find('.table-col--max-width-jobs a').filter(function() {
+                href = $(this)[0].href;
+                // Ellipsize job title if it's too long
+                if ($(this).text().length > 30) {
+                    $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 29) + '...' + '</a>');
+                }
+            });
+        }
+
         $('body').addClass('page--jobs');
         optimizeJobsTable();
         $(document).ajaxStop(optimizeJobsTable); // pagination, sorting, etc result in ajax calls which undo the modifications
+        shortenJobTitle();
     }
-
-
 
     // Find out which page we're on
     var path = $(location).attr("href");
@@ -123,16 +131,7 @@ function runWWorksUI() {
     }
 }
 
-function shortenJobTitleLength() {
-    $('#postingsTable tr').find('.table-col--max-width-jobs strong a').filter(function() {
-        that = $(this)
-        text = that[0].outerText;
-        href = that[0].href; 
-        if (text.length > 33) {
-            that[0].outerHTML = "<a href='" + href + "'>" + text.substring(0, 29) + '...' + "</a>";
-        }
-    });
-}
+
 
 loadWWorksUI(runWWorksUI);
 
