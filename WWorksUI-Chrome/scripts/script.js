@@ -40,7 +40,8 @@ function loadWWorksUI(run) {
 function runWWorksUI() {
     // Script-wise global variables that we can use here
     var PAGE = {
-        JOBS: {value: 0, link: "myAccount/co-op/coop-postings.htm"}
+        JOBS:        {value: 0, link: "myAccount/co-op/coop-postings.htm"},
+        LOGGED_OUT:  {value: 1, link: "notLoggedIn.htm"}
     };
     var current_page = -1;
 
@@ -101,6 +102,11 @@ function runWWorksUI() {
         $(document).ajaxStop(optimizeJobsTable); // pagination, sorting, etc result in ajax calls which undo the modifications
     }
 
+    function applyChangesLoggedOut() {
+        // The login page shown when session expires isn't the one we want
+        window.location.replace("https://cas.uwaterloo.ca/cas/login?service=https://waterlooworks.uwaterloo.ca/waterloo.htm");
+    }
+
     // Find out which page we're on
     var path = $(location).attr("href");
     for (var page in PAGE) {
@@ -116,6 +122,9 @@ function runWWorksUI() {
     switch (current_page) {
         case PAGE.JOBS.value:
             applyChangesJobs();
+            break;
+        case PAGE.LOGGED_OUT.value:
+            applyChangesLoggedOut();
             break;
     }
 }
