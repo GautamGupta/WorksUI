@@ -5,7 +5,7 @@ Improved WaterlooWorks experience. Fork of [MarmoUI](https://github.com/lishid/M
 ## Features
 
  * Better/optimal table layout to view job postings
- * Auto login if session expires
+ * Redirect to login page if session expires
  * Better browser titles
 
 ## Installation
