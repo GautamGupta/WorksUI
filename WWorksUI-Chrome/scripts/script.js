@@ -2,7 +2,7 @@
 // @name                WWorksUI
 // @description         Improved WaterlooWorks experience
 // @author              Product Vision Club (productvisionclub.com)
-// @version             0.2.1
+// @version             0.2.2
 // @include             https://waterlooworks.uwaterloo.ca*
 // ==/UserScript==
 //
@@ -74,6 +74,16 @@ function runWWorksUI() {
             });
         }
 
+        function shortenJobTitle() {
+            $('#postingsTable tr').find('.table-col--max-width-jobs a').filter(function() {
+                var href = $(this).attr('href');
+                // Ellipsize job title if it's too long
+                if ($(this).text().length > 42) {
+                    $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 41) + '&hellip;' + '</a>');
+                }
+            });
+        }
+
         function optimizeJobsTable() {
             // Shorten text where possible
             $('#postingsTable a.favourite:contains("Remove from shortlist")').text('Shortlisted');
@@ -92,25 +102,15 @@ function runWWorksUI() {
             });
 
             // Add max-width to Title, Organization, Location
-            $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width, table-col--max-width-jobs');
+            $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width-jobs');
             $('#postingsTable tr').find('th, td').filter(':nth-child(3)').addClass('table-col--max-width');
             $('#postingsTable tr').find('th, td').filter(':nth-child(4)').addClass('table-col--max-width-sm');
-        }
-
-        function shortenJobTitle() {
-            $('#postingsTable tr').find('.table-col--max-width-jobs a').filter(function() {
-                var href = $(this).attr('href');
-                // Ellipsize job title if it's too long
-                if ($(this).text().length > 43) {
-                    $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 42) + '&hellip;' + '</a>');
-                }
-            });
+            shortenJobTitle();
         }
 
         $('body').addClass('page--jobs');
         optimizeJobsTable();
         $(document).ajaxStop(optimizeJobsTable); // pagination, sorting, etc result in ajax calls which undo the modifications
-        shortenJobTitle();
     }
 
     function applyChangesLoggedOut() {
