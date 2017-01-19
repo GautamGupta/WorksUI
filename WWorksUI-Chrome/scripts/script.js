@@ -92,14 +92,25 @@ function runWWorksUI() {
             });
 
             // Add max-width to Title, Organization, Location
-            $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width');
+            $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width, table-col--max-width-jobs');
             $('#postingsTable tr').find('th, td').filter(':nth-child(3)').addClass('table-col--max-width');
             $('#postingsTable tr').find('th, td').filter(':nth-child(4)').addClass('table-col--max-width-sm');
+        }
+
+        function shortenJobTitle() {
+            $('#postingsTable tr').find('.table-col--max-width-jobs a').filter(function() {
+                var href = $(this).attr('href');
+                // Ellipsize job title if it's too long
+                if ($(this).text().length > 30) {
+                    $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 29) + '&hellip;' + '</a>');
+                }
+            });
         }
 
         $('body').addClass('page--jobs');
         optimizeJobsTable();
         $(document).ajaxStop(optimizeJobsTable); // pagination, sorting, etc result in ajax calls which undo the modifications
+        shortenJobTitle();
     }
 
     function applyChangesLoggedOut() {
@@ -130,3 +141,4 @@ function runWWorksUI() {
 }
 
 loadWWorksUI(runWWorksUI);
+

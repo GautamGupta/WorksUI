@@ -34,5 +34,6 @@ Improved WaterlooWorks experience. Fork of [MarmoUI](https://github.com/lishid/M
 ## Contributors
 
  * [GautamGupta](https://github.com/GautamGupta)
+ * [PranavA](https://github.com/pranavanand123)
 
 Please feel free to create a pull request to contribute.
