@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+# v0.2.1
+ * Ellipsize long job titles
+
 # v0.2
  * Redirect to login page if session expires
 

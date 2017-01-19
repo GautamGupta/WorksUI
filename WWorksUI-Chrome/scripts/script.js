@@ -2,7 +2,7 @@
 // @name                WWorksUI
 // @description         Improved WaterlooWorks experience
 // @author              Product Vision Club (productvisionclub.com)
-// @version             0.1.1
+// @version             0.2.1
 // @include             https://waterlooworks.uwaterloo.ca*
 // ==/UserScript==
 //
@@ -101,8 +101,8 @@ function runWWorksUI() {
             $('#postingsTable tr').find('.table-col--max-width-jobs a').filter(function() {
                 var href = $(this).attr('href');
                 // Ellipsize job title if it's too long
-                if ($(this).text().length > 30) {
-                    $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 29) + '&hellip;' + '</a>');
+                if ($(this).text().length > 43) {
+                    $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 42) + '&hellip;' + '</a>');
                 }
             });
         }
