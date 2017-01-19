@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+# v0.3
+ * Duplicate pagination at the bottom of the jobs table
+
 # v0.2.2
  * Ellipsize long job titles
 

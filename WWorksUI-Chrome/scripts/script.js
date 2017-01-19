@@ -2,7 +2,7 @@
 // @name                WWorksUI
 // @description         Improved WaterlooWorks experience
 // @author              Product Vision Club (productvisionclub.com)
-// @version             0.2.2
+// @version             0.3
 // @include             https://waterlooworks.uwaterloo.ca*
 // ==/UserScript==
 //
@@ -74,23 +74,19 @@ function runWWorksUI() {
             });
         }
 
-        function postDomCreationChanges() {
-            function shortenJobTitle() {
-                $('#postingsTable tr').find('.table-col--max-width-jobs a').filter(function() {
-                    var href = $(this).attr('href');
-                    // Ellipsize job title if it's too long
-                    if ($(this).text().length > 42) {
-                        $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 41) + '&hellip;' + '</a>');
-                    }
-                });
-            }
+        function shortenJobTitle() {
+            $('#postingsTable tr').find('.table-col--max-width-jobs a').each(function() {
+                var text = $(this).text().trim();
+                var href = $(this).attr('href');
+                // Ellipsize job title if it's too long
+                if (text.length > 33) {
+                    $(this).html('<a href="' + href + '" title="' + text + '">' + text.substring(0, 32) + '&hellip;' + '</a>');
+                }
+            });
+        }
 
-            function duplicatePaginationBar() {
-                $('#postingsTablePlaceholder .orbis-posting-actions').clone().insertAfter('#postingsTableDiv');
-            }
-
-            shortenJobTitle();
-            duplicatePaginationBar();
+        function duplicatePaginationBar() {
+            $('#postingsTablePlaceholder .orbis-posting-actions').clone().insertAfter('#postingsTableDiv');
         }
 
         function optimizeJobsTable() {
@@ -99,6 +95,7 @@ function runWWorksUI() {
             $('#postingsTable a.btn-primary:contains("APPLY")').text('Apply');
             $('#postingsTable th:contains("Views") a').text('# Views');
             $('#postingsTable th:contains("Applications") a').text('# Apps');
+            $('#postingsTable th:contains("Openings") a').text('# Openings');
 
             // Move id and level columns to the end
             moveTableColumn($('#postingsTable'), 1, 12); // ID
@@ -114,7 +111,10 @@ function runWWorksUI() {
             $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width-jobs');
             $('#postingsTable tr').find('th, td').filter(':nth-child(3)').addClass('table-col--max-width');
             $('#postingsTable tr').find('th, td').filter(':nth-child(4)').addClass('table-col--max-width-sm');
-            postDomCreationChanges();
+            shortenJobTitle();
+
+            // Pagination also at the bottom of the page
+            duplicatePaginationBar();
         }
 
         $('body').addClass('page--jobs');

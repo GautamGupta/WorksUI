@@ -3,7 +3,7 @@
 
   "name": "WWorksUI",
   "description": "Improved WaterlooWorks experience",
-  "version": "0.2.2",
+  "version": "0.3",
   "icons": {
     "16": "image/icon16.png",
     "48": "image/icon48.png",

@@ -5,7 +5,13 @@ Improved WaterlooWorks experience. Fork of [MarmoUI](https://github.com/lishid/M
 ## Features
 
  * Better/optimal table layout to view job postings
- * Redirect to login page if session expires
+   - Trim long job titles
+   - Move id, # openings, and level to end of the table
+   - Merge organization and division columns
+   - Rename "Remove from shortlist" button to "Shortlisted" to save space
+   - Rename columns to shorten column width where apt
+   - Duplicate pagination at the bottom of the jobs table
+ * Redirect to login page if the session expires
  * Better browser titles
 
 ## Installation
