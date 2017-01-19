@@ -10,7 +10,7 @@
 //
 
 // Variables here are volatile. They are not usable from within the page, but only within this script
-var global_css = '.orbisFooter a{color:#FFF}#postingsTable tr.isNew td{background-color:#FFFFE0}#postingsTable tr.isNew:hover td{background-color:#FFFACD}#postingsTable .table-col--max-width-jobs{max-width:250px} #postingsTable .table-col--max-width{max-width:250px}#postingsTable .table-col--max-width-sm{max-width:200px}';
+var global_css = '.orbisFooter a{color:#FFF}#postingsTable tr.isNew td{background-color:#FFFFE0}#postingsTable tr.isNew:hover td{background-color:#FFFACD}#postingsTable .table-col--max-width{max-width:250px}#postingsTable .table-col--max-width-sm{max-width:200px}';
 
 function loadWWorksUI(run) {
     function appendToHead(element) {
@@ -91,17 +91,17 @@ function runWWorksUI() {
             });
 
             // Add max-width to Title, Organization, Location
-            $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width-jobs');
+            $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width, table-col--max-width-jobs');
             $('#postingsTable tr').find('th, td').filter(':nth-child(3)').addClass('table-col--max-width');
             $('#postingsTable tr').find('th, td').filter(':nth-child(4)').addClass('table-col--max-width-sm');
         }
 
         function shortenJobTitle() {
             $('#postingsTable tr').find('.table-col--max-width-jobs a').filter(function() {
-                href = $(this)[0].href;
+                var href = $(this).attr('href');
                 // Ellipsize job title if it's too long
                 if ($(this).text().length > 30) {
-                    $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 29) + '...' + '</a>');
+                    $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 29) + '&hellip;' + '</a>');
                 }
             });
         }
@@ -130,8 +130,6 @@ function runWWorksUI() {
             break;
     }
 }
-
-
 
 loadWWorksUI(runWWorksUI);
 
