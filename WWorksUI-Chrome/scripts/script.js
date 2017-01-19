@@ -74,14 +74,23 @@ function runWWorksUI() {
             });
         }
 
-        function shortenJobTitle() {
-            $('#postingsTable tr').find('.table-col--max-width-jobs a').filter(function() {
-                var href = $(this).attr('href');
-                // Ellipsize job title if it's too long
-                if ($(this).text().length > 42) {
-                    $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 41) + '&hellip;' + '</a>');
-                }
-            });
+        function postDomCreationChanges() {
+            function shortenJobTitle() {
+                $('#postingsTable tr').find('.table-col--max-width-jobs a').filter(function() {
+                    var href = $(this).attr('href');
+                    // Ellipsize job title if it's too long
+                    if ($(this).text().length > 42) {
+                        $(this).html('<a href="' + href + '" title="' + $(this).text() + '">' + $(this).text().substring(0, 41) + '&hellip;' + '</a>');
+                    }
+                });
+            }
+
+            function duplicatePaginationBar() {
+                $('#postingsTablePlaceholder .orbis-posting-actions').clone().insertAfter('#postingsTableDiv');
+            }
+
+            shortenJobTitle();
+            duplicatePaginationBar();
         }
 
         function optimizeJobsTable() {
@@ -105,7 +114,7 @@ function runWWorksUI() {
             $('#postingsTable tr').find('th, td').filter(':nth-child(2)').addClass('table-col--max-width-jobs');
             $('#postingsTable tr').find('th, td').filter(':nth-child(3)').addClass('table-col--max-width');
             $('#postingsTable tr').find('th, td').filter(':nth-child(4)').addClass('table-col--max-width-sm');
-            shortenJobTitle();
+            postDomCreationChanges();
         }
 
         $('body').addClass('page--jobs');
