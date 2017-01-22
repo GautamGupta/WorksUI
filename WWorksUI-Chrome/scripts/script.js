@@ -2,7 +2,7 @@
 // @name                WWorksUI
 // @description         Improved WaterlooWorks experience
 // @author              Product Vision Club (productvisionclub.com)
-// @version             0.3
+// @version             0.3.1
 // @include             https://waterlooworks.uwaterloo.ca*
 // ==/UserScript==
 //
@@ -10,7 +10,7 @@
 //
 
 // Variables here are volatile. They are not usable from within the page, but only within this script
-var global_css = '.orbisFooter a{color:#FFF}#postingsTable tr.isNew td{background-color:#FFFFE0}#postingsTable tr.isNew:hover td{background-color:#FFFACD}#postingsTable .table-col--max-width{max-width:250px}#postingsTable .table-col--max-width-sm{max-width:200px}';
+var global_css = '.orbisFooter a{color:#FFF}#postingsTable .table-col--max-width{max-width:250px}#postingsTable .table-col--max-width-sm{max-width:200px}';
 
 function loadWWorksUI(run) {
     function appendToHead(element) {

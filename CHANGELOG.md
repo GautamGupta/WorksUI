@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+# v0.3.1
+ * Do not highlight new job rows as the "NEW" tag isn't itself helpful
+
 # v0.3
  * Duplicate pagination at the bottom of the jobs table
 
