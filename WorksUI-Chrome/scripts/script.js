@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name                WWorksUI
+// @name                WorksUI
 // @description         Improved WaterlooWorks experience
-// @author              Product Vision Club (productvisionclub.com)
+// @author              Gautam Gupta (gaut.am)
 // @version             0.3.1
 // @include             https://waterlooworks.uwaterloo.ca*
 // ==/UserScript==
@@ -12,7 +12,7 @@
 // Variables here are volatile. They are not usable from within the page, but only within this script
 var global_css = '.orbisFooter a{color:#FFF}#postingsTable .table-col--max-width{max-width:250px}#postingsTable .table-col--max-width-sm{max-width:200px}';
 
-function loadWWorksUI(run) {
+function loadWorksUI(run) {
     function appendToHead(element) {
         document.getElementsByTagName("head")[0].appendChild(element);
     }
@@ -37,7 +37,7 @@ function loadWWorksUI(run) {
     loadScript(run);
 }
 
-function runWWorksUI() {
+function runWorksUI() {
     // Script-wise global variables that we can use here
     var PAGE = {
         JOBS:        {value: 0, link: "myAccount/co-op/coop-postings.htm"},
@@ -53,12 +53,12 @@ function runWWorksUI() {
             title.push("WaterlooWorks");
             return title.join(" - ");
         }
-        
+
         // Change browser title
         document.title = modifyTitle(document.title);
 
         // Remove current time and replace by an actual footer
-        $(".orbisFooter .span6").append(" / <a href='https://github.com/ProductVisionClub/WWorksUI' target='_blank'>WWorksUI</a> by <a href='http://productvisionclub.com/' target='_blank'>Product Vision Club</a>");
+        $(".orbisFooter .span6").append(" / <a href='https://github.com/GautamGupta/WorksUI' target='_blank'>WorksUI</a>");
 
         // Google analytics helps for statistics
         $("head").append("<script type='text/javascript'>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-6851149-15', 'auto');ga('send', 'pageview');</script>");
@@ -149,5 +149,5 @@ function runWWorksUI() {
     }
 }
 
-loadWWorksUI(runWWorksUI);
+loadWorksUI(runWorksUI);
 
