@@ -2,7 +2,7 @@
 // @name                WorksUI
 // @description         Improved WaterlooWorks experience
 // @author              Gautam Gupta (gaut.am)
-// @version             0.3.1
+// @version             0.4
 // @include             https://waterlooworks.uwaterloo.ca*
 // ==/UserScript==
 //
